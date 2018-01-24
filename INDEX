@@ -1,0 +1,29 @@
+CombineData             Combine the family information data and cancer
+                        information data
+LFSChompret             The Chompret criteria for Li-Fraumeni syndrome
+LFSChompret2015         The Chompret criteria for Li-Fraumeni syndrome
+LFSClassic              The Classic criteria for Li-Fraumeni syndrome
+LFSPRO-package          TP53 mutation carrier estimation
+LFSpenet.2010           Penetrance for TP53 mutation
+LFSpro.cancer.type      Predefined cancer types and the corresponding
+                        number in LFSpro
+calLK                   Calculate the likelihood Pr(D|G).
+cancer.data             Cancer information data
+cancer.type.all         Predefined cancer types in LFSPRO.
+fam.cancer.data         Combined data with family and cancer
+                        information
+fam.data                Family information data
+firstDegreeRelative     First degree relatives
+invasive.cut            Cutoff for malignant cancer
+lfs.cut                 Cutoff for Li-Fraumeni Syndrome spectrum cancer
+lfspro                  Estimating TP53 mutation probability for
+                        families with Li-Fraumeni Syndrome
+lfsproC                 Estimating TP53 mutation probability for
+                        families with Li-Fraumeni Syndrome for combined
+                        family and cancer data
+lkNoneAffect            Likelihood for non-affected individuals
+peelingRC               Peeling interface in R.
+reformatForClassicChompret
+                        Reformat input data of LFSpro for evaluation
+                        using the Classic or the Chompret criteria
+secondDegreeRelative    Second degree relative
