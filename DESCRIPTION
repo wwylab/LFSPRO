@@ -8,4 +8,5 @@ Maintainer: Gang Peng <michael.gang.peng@gmail.com>
 Description: TP53 mutation is a main cause of Li-Fraumeni syndrome. This package is designed to estimate the probability that the counselee is a TP53 mutation carrier on the basis of his/her family cancer history. We also included LFS classic and Chompret criteria in the package.
 License: GPL-3
 LazyData: true
-Built: R 3.2.3; x86_64-apple-darwin13.4.0; 2016-12-14 17:57:13 UTC; unix
+NeedsCompilation: yes
+Packaged: 2016-12-14 17:54:57 UTC; gpeng
