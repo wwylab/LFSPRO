@@ -1,11 +1,18 @@
 Package: LFSPRO
 Type: Package
-Title: TP53 mutation carrier estimation
-Version: 1.0.5
-Date: 2016-12-14
-Author: Gang Peng, Wenyi Wang
-Maintainer: Gang Peng <michael.gang.peng@gmail.com>
-Description: TP53 mutation is a main cause of Li-Fraumeni syndrome. This package is designed to estimate the probability that the counselee is a TP53 mutation carrier on the basis of his/her family cancer history. We also included LFS classic and Chompret criteria in the package.
-License: GPL-3
+Title: TP53 germline mutation carrier estimation and cancer risk
+        predictions
+Version: 2.0.0
+Date: 2018-09-10
+Author: Gang Peng, Seung Jun Shin, Jasper Chen, Wenyi Wang
+Maintainer: Wenyi Wang <wwang7@mdanderson.org>
+Description: TP53 germline mutations are the main cause of Li-Fraumeni syndrome. This package is designed to estimate probabilities that:  1) the counselee is a TP53 germline mutation carrier, 2) the counselee develops any cancer in future, 3) the counselee develops breast cancer, sarcoma or any other cancers in future, 4) the counselee develops a first or second primary cancer in future, on the basis of his/her family cancer history. The package also provides functions for using the LFS classic and Chompret criteria.
 LazyData: true
-Built: R 3.2.3; x86_64-apple-darwin13.4.0; 2016-12-14 17:57:13 UTC; unix
+Lazyload: true
+Depends: R (>= 2.10)
+NeedsCompilation: true
+License: GPL-3
+Encoding: UTF-8
+Packaged: 2018-12-26 17:29:21 EST
+RoxygenNote: 6.1.1
+Built: R 3.5.2; x86_64-apple-darwin15.6.0; 2019-02-15 17:31:08 UTC; unix

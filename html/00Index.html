@@ -1,17 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>R: TP53 mutation carrier estimation</title>
+<head><title>R: TP53 germline mutation carrier estimation and cancer risk
+predictions</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
-<h1> TP53 mutation carrier estimation
-<img class="toplogo" src="../../../doc/html/logo.jpg" alt="[R logo]" />
+<h1> TP53 germline mutation carrier estimation and cancer risk
+predictions
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
 <hr/>
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;LFSPRO&rsquo; version 1.0.5</h2>
+</div><h2>Documentation for package &lsquo;LFSPRO&rsquo; version 2.0.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -21,45 +23,69 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="LFSpro-package.html">LFSPRO-package</a></td>
-<td>TP53 mutation carrier estimation</td></tr>
+<td>TP53 mutation carrier estimation and cancer risk predictions</td></tr>
 <tr><td style="width: 25%;"><a href="calLK.html">calLK</a></td>
 <td>Calculate the likelihood Pr(D|G).</td></tr>
+<tr><td style="width: 25%;"><a href="calLK.cs.html">calLK.cs</a></td>
+<td>Calculate the likelihood Pr(D|G) for cancer specific.</td></tr>
+<tr><td style="width: 25%;"><a href="calLK.mpc.html">calLK.mpc</a></td>
+<td>Calculate the likelihood Pr(D|G) of multiple primary cancers.</td></tr>
 <tr><td style="width: 25%;"><a href="cancer.data.html">cancer.data</a></td>
-<td>Cancer information data</td></tr>
+<td>Built-in Cancer Information Data example</td></tr>
 <tr><td style="width: 25%;"><a href="cancer.type.all.html">cancer.type.all</a></td>
 <td>Predefined cancer types in LFSPRO.</td></tr>
-<tr><td style="width: 25%;"><a href="CombineData.html">CombineData</a></td>
+<tr><td style="width: 25%;"><a href="combined.risk.mpc.html">combined.risk.mpc</a></td>
+<td>Calculate the future cancer risk using the MPC model</td></tr>
+<tr><td style="width: 25%;"><a href="combinedata.html">combinedata</a></td>
 <td>Combine the family information data and cancer information data</td></tr>
+<tr><td style="width: 25%;"><a href="convert.data.html">convert.data</a></td>
+<td>Convert the combined family information data and cancer information data into separate data objects.</td></tr>
 <tr><td style="width: 25%;"><a href="fam.cancer.data.html">fam.cancer.data</a></td>
-<td>Combined data with family and cancer information</td></tr>
+<td>Data object with Family and Cancer Information Example</td></tr>
 <tr><td style="width: 25%;"><a href="fam.data.html">fam.data</a></td>
-<td>Family information data</td></tr>
+<td>Built-in Family Information Data Example</td></tr>
 <tr><td style="width: 25%;"><a href="firstDegreeRelative.html">firstDegreeRelative</a></td>
 <td>First degree relatives</td></tr>
 <tr><td style="width: 25%;"><a href="invasive.cut.html">invasive.cut</a></td>
 <td>Cutoff for malignant cancer</td></tr>
 <tr><td style="width: 25%;"><a href="lfs.cut.html">lfs.cut</a></td>
 <td>Cutoff for Li-Fraumeni Syndrome spectrum cancer</td></tr>
-<tr><td style="width: 25%;"><a href="LFSChompret.html">LFSChompret</a></td>
+<tr><td style="width: 25%;"><a href="lfsChompret2009.html">lfsChompret2009</a></td>
 <td>The Chompret criteria for Li-Fraumeni syndrome</td></tr>
-<tr><td style="width: 25%;"><a href="LFSChompret2015.html">LFSChompret2015</a></td>
+<tr><td style="width: 25%;"><a href="lfsChompret2015.html">lfsChompret2015</a></td>
 <td>The Chompret criteria for Li-Fraumeni syndrome</td></tr>
-<tr><td style="width: 25%;"><a href="LFSClassic.html">LFSClassic</a></td>
+<tr><td style="width: 25%;"><a href="lfsClassic.html">lfsClassic</a></td>
 <td>The Classic criteria for Li-Fraumeni syndrome</td></tr>
-<tr><td style="width: 25%;"><a href="LFSpenet.2010.html">LFSpenet.2010</a></td>
-<td>Penetrance for TP53 mutation</td></tr>
-<tr><td style="width: 25%;"><a href="lfspro.html">lfspro</a></td>
-<td>Estimating TP53 mutation probability for families with Li-Fraumeni Syndrome</td></tr>
-<tr><td style="width: 25%;"><a href="LFSpro.cancer.type.html">LFSpro.cancer.type</a></td>
-<td>Predefined cancer types and the corresponding number in LFSpro</td></tr>
+<tr><td style="width: 25%;"><a href="lfspenet.2010.html">lfspenet.2010</a></td>
+<td>Penetrance for TP53 mutations</td></tr>
+<tr><td style="width: 25%;"><a href="lfspenet.cs.death.html">lfspenet.cs.death</a></td>
+<td>Penetrance table for cancer-specific mutation with four competing risks (breast cancer, sarcoma, other cancers and death).</td></tr>
+<tr><td style="width: 25%;"><a href="lfspenet.cs.nodeath.html">lfspenet.cs.nodeath</a></td>
+<td>Penetrance table for cancer-specific mutation with three competing risks (breast cancer, sarcoma and other cancers).  Default penetrance table in predicting cancer-specific risks.</td></tr>
+<tr><td style="width: 25%;"><a href="lfspro.cancer.type.html">lfspro.cancer.type</a></td>
+<td>Predefined cancer types and the corresponding number in lfspro</td></tr>
+<tr><td style="width: 25%;"><a href="lfspro.mode.html">lfspro.mode</a></td>
+<td>Estimate TP53 mutation probability and predict cancer risk for families with Li-Fraumeni Syndrome with mode choice</td></tr>
 <tr><td style="width: 25%;"><a href="lfsproC.html">lfsproC</a></td>
-<td>Estimating TP53 mutation probability for families with Li-Fraumeni Syndrome for combined family and cancer data</td></tr>
+<td>Calculate the posterior probability of p53 mutations on the basis of family history</td></tr>
+<tr><td style="width: 25%;"><a href="lfsproC.cs.html">lfsproC.cs</a></td>
+<td>Calculate the posterior probability of p53 mutations for cancer-specific risk prediction model on the basis of family history</td></tr>
+<tr><td style="width: 25%;"><a href="lfsproC.mpc.html">lfsproC.mpc</a></td>
+<td>Calculate the posterior probability of p53 mutations for multiple primary cancer on the basis of family history</td></tr>
 <tr><td style="width: 25%;"><a href="lkNoneAffect.html">lkNoneAffect</a></td>
-<td>Likelihood for non-affected individuals</td></tr>
+<td>Likelihood for un-affected individuals</td></tr>
+<tr><td style="width: 25%;"><a href="lkNoneAffect.cs.html">lkNoneAffect.cs</a></td>
+<td>Likelihood for un-affected individuals for cancer-specific model</td></tr>
+<tr><td style="width: 25%;"><a href="parameter.mpc.html">parameter.mpc</a></td>
+<td>Estimated parameter for semiparametric recurrent event model of multiple primary cancers</td></tr>
 <tr><td style="width: 25%;"><a href="peelingRC.html">peelingRC</a></td>
 <td>Peeling interface in R.</td></tr>
 <tr><td style="width: 25%;"><a href="reformatForClassicChompret.html">reformatForClassicChompret</a></td>
-<td>Reformat input data of LFSpro for evaluation using the Classic or the Chompret criteria</td></tr>
+<td>Reformat input data of LFSPRO for evaluation using the Classic or the Chompret criteria</td></tr>
+<tr><td style="width: 25%;"><a href="risk.cs.html">risk.cs</a></td>
+<td>Predict the cancer-specific risk</td></tr>
+<tr><td style="width: 25%;"><a href="risk.mpc.html">risk.mpc</a></td>
+<td>Predict the risks of developing multiple primary cancers</td></tr>
 <tr><td style="width: 25%;"><a href="secondDegreeRelative.html">secondDegreeRelative</a></td>
 <td>Second degree relative</td></tr>
 </table>

@@ -1,29 +1,60 @@
-CombineData             Combine the family information data and cancer
-                        information data
-LFSChompret             The Chompret criteria for Li-Fraumeni syndrome
-LFSChompret2015         The Chompret criteria for Li-Fraumeni syndrome
-LFSClassic              The Classic criteria for Li-Fraumeni syndrome
-LFSPRO-package          TP53 mutation carrier estimation
-LFSpenet.2010           Penetrance for TP53 mutation
-LFSpro.cancer.type      Predefined cancer types and the corresponding
-                        number in LFSpro
+LFSPRO-package          TP53 mutation carrier estimation and cancer
+                        risk predictions
 calLK                   Calculate the likelihood Pr(D|G).
-cancer.data             Cancer information data
+calLK.cs                Calculate the likelihood Pr(D|G) for cancer
+                        specific.
+calLK.mpc               Calculate the likelihood Pr(D|G) of multiple
+                        primary cancers.
+cancer.data             Built-in Cancer Information Data example
 cancer.type.all         Predefined cancer types in LFSPRO.
-fam.cancer.data         Combined data with family and cancer
-                        information
-fam.data                Family information data
+combined.risk.mpc       Calculate the future cancer risk using the MPC
+                        model
+combinedata             Combine the family information data and cancer
+                        information data
+convert.data            Convert the combined family information data
+                        and cancer information data into separate data
+                        objects.
+fam.cancer.data         Data object with Family and Cancer Information
+                        Example
+fam.data                Built-in Family Information Data Example
 firstDegreeRelative     First degree relatives
 invasive.cut            Cutoff for malignant cancer
 lfs.cut                 Cutoff for Li-Fraumeni Syndrome spectrum cancer
-lfspro                  Estimating TP53 mutation probability for
-                        families with Li-Fraumeni Syndrome
-lfsproC                 Estimating TP53 mutation probability for
-                        families with Li-Fraumeni Syndrome for combined
-                        family and cancer data
-lkNoneAffect            Likelihood for non-affected individuals
+lfsChompret2009         The Chompret criteria for Li-Fraumeni syndrome
+lfsChompret2015         The Chompret criteria for Li-Fraumeni syndrome
+lfsClassic              The Classic criteria for Li-Fraumeni syndrome
+lfspenet.2010           Penetrance for TP53 mutations
+lfspenet.cs.death       Penetrance table for cancer-specific mutation
+                        with four competing risks (breast cancer,
+                        sarcoma, other cancers and death).
+lfspenet.cs.nodeath     Penetrance table for cancer-specific mutation
+                        with three competing risks (breast cancer,
+                        sarcoma and other cancers).  Default penetrance
+                        table in predicting cancer-specific risks.
+lfspro.cancer.type      Predefined cancer types and the corresponding
+                        number in lfspro
+lfspro.mode             Estimate TP53 mutation probability and predict
+                        cancer risk for families with Li-Fraumeni
+                        Syndrome with mode choice
+lfsproC                 Calculate the posterior probability of p53
+                        mutations on the basis of family history
+lfsproC.cs              Calculate the posterior probability of p53
+                        mutations for cancer-specific risk prediction
+                        model on the basis of family history
+lfsproC.mpc             Calculate the posterior probability of p53
+                        mutations for multiple primary cancer on the
+                        basis of family history
+lkNoneAffect            Likelihood for un-affected individuals
+lkNoneAffect.cs         Likelihood for un-affected individuals for
+                        cancer-specific model
+parameter.mpc           Estimated parameter for semiparametric
+                        recurrent event model of multiple primary
+                        cancers
 peelingRC               Peeling interface in R.
 reformatForClassicChompret
-                        Reformat input data of LFSpro for evaluation
+                        Reformat input data of LFSPRO for evaluation
                         using the Classic or the Chompret criteria
+risk.cs                 Predict the cancer-specific risk
+risk.mpc                Predict the risks of developing multiple
+                        primary cancers
 secondDegreeRelative    Second degree relative
