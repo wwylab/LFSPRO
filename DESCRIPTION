@@ -1,7 +1,6 @@
 Package: LFSPRO
 Type: Package
-Title: TP53 germline mutation carrier estimation and cancer risk
-        predictions
+Title: TP53 germline mutation carrier estimation and cancer risk predictions
 Version: 2.0.0
 Date: 2018-09-10
 Author: Gang Peng, Seung Jun Shin, Jasper Chen, Wenyi Wang
@@ -15,4 +14,3 @@ License: GPL-3
 Encoding: UTF-8
 Packaged: 2018-12-26 17:29:21 EST
 RoxygenNote: 6.1.1
-Built: R 3.5.2; x86_64-apple-darwin15.6.0; 2019-02-15 17:31:08 UTC; unix
