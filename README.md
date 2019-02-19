@@ -5,6 +5,7 @@ TP53 germline mutations are the main cause of Li-Fraumeni syndrome. This package
 ## Installation
 
 library(devtools)
+
 install_github("wwylab/LFSPRO")
 
 ## Sample codes
@@ -12,7 +13,8 @@ install_github("wwylab/LFSPRO")
 The following code briefly illustrates how to use the major functions in the package. Check out the links below for details.
 
 [LFSPRO Github](https://github.com/wwylab/LFSPRO)
-[LFSPRO Website](https://bioinformatics.mdanderson.org/public-software/lfspro)
+
+[MD Anderson LFSPRO Website](https://bioinformatics.mdanderson.org/public-software/lfspro)
 
 ```
 fam.id <- c("fam1","fam2","fam2","fam2","fam2")
