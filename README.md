@@ -18,7 +18,7 @@ The following code briefly illustrates how to use the major functions in the pac
 
 ```
 fam.id <- c("fam1","fam2","fam2","fam2","fam2")
-id <- c(1,1,2,100,200)
+id <- c(9,1,2,100,200)
 counselee.id <- data.frame(fam.id, id)
 
 # LFS classic criteria
@@ -26,12 +26,7 @@ lfsClassic(fam.data, cancer.data, counselee.id)
 # Chompret criteria
 lfsChompret2015(fam.data, cancer.data, counselee.id)
 
-# "1st.all" predict the probability of carrying TP53 mutations
-lfspro.mode(fam.data, cancer.data, counselee.id, "1st.all")
-# "mpc" predict future risks of developing multiple primary cancers
-lfspro.mode(fam.data, cancer.data, counselee.id, "mpc")
-# "1st.cs" predict future risks of having breast cancer, sarcoma, other cancers, and death
-lfspro.mode(fam.data, cancer.data, counselee.id, "1st.cs")
+lfspro(fam.data, cancer.data, counselee.id)
 ```
 
 

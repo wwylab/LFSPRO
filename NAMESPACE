@@ -1,4 +1,4 @@
 #exportPattern("^[[:alpha:]]+")
 exportPattern("^[^\\.]") 
-importFrom("stats", "dbeta", "pbeta", "aggregate")
+importFrom("stats", "dbeta", "pbeta", "aggregate","na.omit")
 useDynLib(LFSPRO)
