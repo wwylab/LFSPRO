@@ -31,7 +31,7 @@ Li, F. P., et al. (1988). A cancer family syndrome in twenty-four kindreds. \emp
 Gang Peng
 }
 \seealso{
-\code{\link{lfsChompret2015}}, \code{\link{lfspro.mode}}
+\code{\link{lfsChompret2015}}, \code{\link{lfspro}}
 }
 \examples{
 options(stringsAsFactors = FALSE)

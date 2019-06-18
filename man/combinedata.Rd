@@ -32,7 +32,7 @@ Gang Peng
 }
 
 \seealso{
-\code{\link{lfspro.mode}}, \code{\link{lfsproC}}
+\code{\link{lfspro}}, \code{\link{lfsproC}}
 }
 \examples{
 cancer.data$cancer.type <- c(2,4,3,7,2,2,6,50,50,2,4,50,50,4,50) #cancer types

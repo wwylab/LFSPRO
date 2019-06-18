@@ -26,7 +26,7 @@ Data frame including two variables: fam.id (family ids of counselees) and id (in
 }
 
 \author{
-  Jasper Chen
+  Jingxiao Chen
 }
 \examples{
 counselee.id <- data.frame(fam.id = "fam1", cid=1)

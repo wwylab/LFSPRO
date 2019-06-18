@@ -4,7 +4,7 @@
   Predict the risks of developing multiple primary cancers
 }
 \description{
-Calculate the future cancer risk of each counselee who is either healthy or has had one primary cancer before using the MPC model (this model is not built to predict the cancer risks for patients who have had multiple primary cancer). This function has been integrated in \link{lfspro.mode} to predict cancer risks when mode is "mpc". 
+Calculate the future cancer risk of each counselee who has had one primary cancer before using the MPC model (this model is not built to predict the cancer risks for patients who have had multiple primary cancer).. 
 }
 \usage{
   risk.mpc(fam.cancer.data, cancer.data, cid, data2, parameter)
@@ -30,7 +30,7 @@ Shin SJ, Li J, Ning J, Bodjadzieva J, Strong LC and Wang W. A Bayesian estimatio
 }
 
 \author{
-  Jasper Chen
+  Jingxiao Chen
 }
 \examples{
 fam.id <- unique(fam.data$fam.id) 

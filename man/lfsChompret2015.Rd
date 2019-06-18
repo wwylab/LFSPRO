@@ -36,7 +36,7 @@ Gang Peng
 }
 
 \seealso{
-\code{\link{lfsClassic}}, \code{\link{lfspro.mode}}, \code{\link{lfsChompret2009}}
+\code{\link{lfsClassic}}, \code{\link{lfspro}}, \code{\link{lfsChompret2009}}
 }
 \examples{
 options(stringsAsFactors = FALSE)

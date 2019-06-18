@@ -14,7 +14,7 @@ Calculate the likelihood (Pr(D|G), probability of disease status D given the gen
     Data including family information and cancer information. See \link{fam.cancer.data} for details.
   }
   \item{penetrance.all}{
-    The penetrance of three genotype (wild type, one copy and two copies of TP53 mutated alleles) for male and female in the population. See \link{lfspenet.cs.death} for details.
+    The penetrance of three genotype (wild type, one copy and two copies of TP53 mutated alleles) for male and female in the population. See \link{lfspenet.cs} for details.
   }
 }
 
@@ -34,6 +34,6 @@ Shin, S. J., Yuan, Y., Strong, L. C., Bojadzieva, J., and Wang, W. (2018). Bayes
 \examples{
 cancer.data$cancer.type <- c(2,4,3,7,2,2,6,50,50,2,4,50,50,4,50) #cancer types
 fam.cancer.data <- combinedata(fam.data, cancer.data)
-calLK.cs(fam.cancer.data[[1]], lfspenet.cs.nodeath)
+calLK.cs(fam.cancer.data[[1]], lfspenet.cs)
 }
 

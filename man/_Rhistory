@@ -1,0 +1,8 @@
+load("~/Documents/GitHub/LFSPRO/data/penetrances.RData")
+rm(lfspenet.cs.nodeath)
+lfspenet.cs <- lfspenet.cs.death
+rm(lfspenet.cs.death)
+save(lfspenet.2010,lfspenet.cs,file="../data/penetrances.RData")
+pack <- "LFSPRO"
+path <- find.package(pack)
+system(paste(shQuote(file.path(R.home("bin"), "R")),"CMD", "Rd2pdf", shQuote(path)))

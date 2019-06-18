@@ -41,7 +41,7 @@ Shin, S. J., Yuan, Y., Strong, L. C., Bojadzieva, J., and Wang, W. (2018). Bayes
 }
 
 \seealso{
-  \code{\link{lfsClassic}}, \code{\link{lfsChompret2009}}, \code{\link{lfsChompret2015}}, \code{\link{lfspro.mode}}, \code{\link{lfspro.mode}}
+  \code{\link{lfsClassic}}, \code{\link{lfsChompret2009}}, \code{\link{lfsChompret2015}}, \code{\link{lfspro}}
 }
 \examples{
 famdata <- fam.data[fam.data$fam.id == "fam2",] 
@@ -52,6 +52,6 @@ allef <- list(c(1 - 1.0e-4, 1.0e-4))
 mRate <- 1.0e-6
 cid <- c(1:4)
 fam.cancer.data <- combinedata(fam.data, cancer.data) 
-lfsproC.cs(fam.cancer.data[[1]], lfspenet.cs.nodeath, 
+lfsproC.cs(fam.cancer.data[[1]], lfspenet.cs, 
            cid, allef, nloci, mRate)
 }

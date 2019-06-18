@@ -34,7 +34,7 @@ Gang Peng
 }
 
 \seealso{
-\code{\link{lfsClassic}}, \code{\link{lfspro.mode}}
+\code{\link{lfsClassic}}, \code{\link{lfspro}}
 }
 \examples{
 fam.id <- c("fam1","fam2","fam2","fam2","fam2")

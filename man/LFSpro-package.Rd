@@ -17,7 +17,7 @@ License: \tab GPL-3 \cr
 }
 }
 \author{
-Gang Peng, SeungJun Shin, Jasper Chen, Wenyi Wang
+Gang Peng, SeungJun Shin, Jingxiao Chen, Wenyi Wang
 
 Maintainer: Wenyi Wang <wwang7@mdanderson.org>
 }
@@ -33,17 +33,19 @@ Chen, S., Wang, W., Broman, K. and Parmigiani, G. (2004) BayesMendel: An R Envir
 }
 
 \note{
+New features in 2.0.1: lfspro.mode is replaced by lfspro, for simplicity, which estimates future cancer risks based on primary cancer history.  
+
 New features in 2.0.0: lfspro.mode is added to replace lfspro to account for additional utilities in cancer-specific and multiple primary cancer risk predictions. Simply specify parameter "mode" to call desired functions. 
 
 New features in 1.0.5: (1) add function lfsChompret2015, (2) update the the default MAF and de novo mutation rate. 
 }
 
 \seealso{
-\code{\link{lfspro.mode}}, \code{\link{lfsClassic}}, \code{\link{lfsChompret2009}}
+\code{\link{lfspro}}, \code{\link{lfsClassic}}, \code{\link{lfsChompret2009}}
 }
 \examples{
 fam.id <- c("fam1","fam2","fam2","fam2","fam2")
-id <- c(1,1,2,100,200)
+id <- c(9,1,2,100,200)
 counselee.id <- data.frame(fam.id, id)
 
 # LFS classic criteria
@@ -51,10 +53,5 @@ lfsClassic(fam.data, cancer.data, counselee.id)
 # Chompret criteria
 lfsChompret2015(fam.data, cancer.data, counselee.id)
 
-# "1st.all" predict the probability of carrying TP53 mutations
-lfspro.mode(fam.data, cancer.data, counselee.id, "1st.all")
-# "mpc" predict future risks of developing multiple primary cancers
-lfspro.mode(fam.data, cancer.data, counselee.id, "mpc")
-# "1st.cs" predict future risks of having breast cancer, sarcoma, other cancers, and death
-lfspro.mode(fam.data, cancer.data, counselee.id, "1st.cs")
+lfspro(fam.data, cancer.data, counselee.id)
 }
