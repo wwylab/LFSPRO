@@ -200,8 +200,10 @@ risk.cs <- function (fam.cancer.data, penetrance.all, counselee.id, posterior){
     breast <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, br.risk), check.names = FALSE)
     sarcoma <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, sar.risk), check.names = FALSE)
     others <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, other.risk), check.names = FALSE)
-    death <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, d.risk), check.names = FALSE)
-    return(list(breast, sarcoma, others, death))
+    output <- list(Breast_risks=breast, 
+                   Sarcoma_risks=sarcoma, 
+                   Other_cancers=others)
+    return(output)
   }
     
     

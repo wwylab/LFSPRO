@@ -6,7 +6,7 @@
 
 # Avoid the binding error. 
  utils::globalVariables(c("lfspro.cancer.type", "lfs.cut", "cancer.type.all", "parameter.mpc", "lfspenet.2010",
-                          "lfspenet.cs.death", "invasive.cut"))
+                          "lfspenet.cs", "invasive.cut"))
 
 # if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
 

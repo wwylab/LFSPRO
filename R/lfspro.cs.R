@@ -43,7 +43,7 @@ function (fam.data, cancer.data, penetrance.all, counselee.id,
                      cid, allef, nloci, mRate)
     pp.tmp <- 1 - pp[,1]
     pp.all <- c(pp.all, pp.tmp)
-    risk.temp <- risk.cs(fam.cancer.data[[i]], lfspenet.cs.death, cid, pp)
+    risk.temp <- risk.cs(fam.cancer.data[[i]], lfspenet.cs, cid, pp)
     if (is.null(risk.cs)) {
       risk.cs <- c(risk.cs, risk.temp)
     } else {

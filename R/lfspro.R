@@ -1,11 +1,7 @@
-utils::globalVariables(c("lfspenet.cs.nodeath", "new.lfspro.cancer.type"))
-
-.lfspro <- function(fam.data, cancer.data, penetrance.all, counselee.id,
-                   allef, nloci, mRate){
+lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
+                        allef=list(c(0.9994,0.0006)), nloci=1, mRate=0.00012){
   # Aim: calculate the posterior probability of TP53 mutaitons on the basis of
   #    family history
-  # Author: Gang Peng
-  #
   # Input:
   #    fam.data: data frame. family information including fam.id(family id), id,
   #      fid(father id), mid(mother id), gender(0: female, 1:male), 
@@ -18,11 +14,10 @@ utils::globalVariables(c("lfspenet.cs.nodeath", "new.lfspro.cancer.type"))
   #    allef: alle frequency
   #    nloci: number of loci
   #    mRate: mutation rate
-  # 
-  # Output: the posterior probability as a TP53 mutation carrier for each counselees
-  
-  # convert cancer type to specific number and check the cancer type
-  num.cancer <- nrow(cancer.data)
+  #    mode: type of LFS prediction model, "1st.all", "mpc" or "1st.cs"
+  #    Output: the posterior probability as a TP53 mutation carrier for each counselees
+
+  num.cancer <- nrow(cancer.data) 
   cancer.type.num <- rep(-1, num.cancer)
   colnames(counselee.id) <- c("fam.id", "id")
   for(i in 1:num.cancer){
@@ -32,7 +27,7 @@ utils::globalVariables(c("lfspenet.cs.nodeath", "new.lfspro.cancer.type"))
                   " in the LFSPRO predefined cancer type", sep = ""))
       print("LFSPRO predefined cancer types are: ")
       print(cancer.type.all)
-      print("Please check the input data on cancer information.")
+      print("Please check the input cancer information data.")
       
       num.counselee <- nrow(counselee.id)
       pp <- rep(-1, num.counselee)
@@ -43,13 +38,13 @@ utils::globalVariables(c("lfspenet.cs.nodeath", "new.lfspro.cancer.type"))
     }
     cancer.type.num[i] <- tmp
   }
-  
   cancer.data$cancer.type <- cancer.type.num
-  
-  
   fam.cancer.data <- combinedata(fam.data, cancer.data)
-  num.fam <- length(fam.cancer.data)
   
+  num.fam <- length(fam.cancer.data)
+  risk.mpc.output <- NULL
+  risk.cs.output <- NULL
+  risk.mpc.final <- data.frame()
   pp.all <- NULL
   for(i in 1:num.fam){
     cid <- counselee.id$id[counselee.id$fam.id == fam.cancer.data[[i]]$fam.id[1]]
@@ -59,174 +54,55 @@ utils::globalVariables(c("lfspenet.cs.nodeath", "new.lfspro.cancer.type"))
       next
     }
     
-    pp.tmp <- lfsproC(fam.cancer.data[[i]], penetrance.all, cid, allef, nloci,mRate)
-    pp.all <- c(pp.all, pp.tmp)
-  }
-  
-  rlt <- data.frame(cbind(counselee.id,pp.all),check.names = FALSE)
-  colnames(rlt) <- c("fam.id", "id", "pp")
-  return(rlt)
-}
-
-
-lfsproC <- function(fam.cancer.data, penetrance.all, counselee.id, allef, nloci,mRate){
-  # Aim: calculate the posterior probability of p53 mutations on the basis of
-  # family history for combined family and cancer data
-  # Author: Gang Peng
-  # 
-  # Input:
-  # fam.cancer.data: family and cancer data including at least id, gender, 
-  # fid (father id), mid (mother id), age (current age or death age), 
-  # num.cancer (number of invasive cancers), cancer.info (list, for each individual
-  # store diag.cancer and diag.age)
-  # Output:
-  #
-  # the posterior probability for p53 variant
-  lik <- calLK(fam.cancer.data, penetrance.all)
-  
-  ##################################
-  # convert data
-  ##################################
-  id <- as.integer(fam.cancer.data$id)
-  fid <- as.integer(fam.cancer.data$fid)
-  mid <- as.integer(fam.cancer.data$mid)
-  counselee.id <- as.integer(counselee.id)
-  
-  if(min(id)==0){
-    id <- id+1
-    fid <- fid+1
-    mid <- mid+1
-    counselee.id <- counselee.id+1
-  }
-  fid[is.na(fid)] <- 0
-  mid[is.na(mid)] <- 0
-  
-  ped <- data.frame(ID=id, Gender = fam.cancer.data$gender,
-                    FatherID = fid, 
-                    MotherID = mid, 
-                    stringsAsFactors=FALSE)
-  
-#   print(allef)
-#   print(lik)
-#   print(ped)
-#   print(counselee.id)
-#   print(nloci)
-#   print(mRate)
-  pp <- peelingRC(allef, lik, ped,
-                 counselee.id, nloci, mRate)
-  return(1-pp[,1])
-}
-
-calLK <- function(fam.cancer.data, penetrance.all){
-  # Aim: calculate the likelihood, Pr(D|G) for each individual
-  # Author: Gang Peng
-  #
-  # input: 
-  # fam.cancer.data: family data
-  # penetrance.all: penetrance in the population for male and female
-  #
-  # output:
-  # likelihood
-  
-  num.individual <- length(fam.cancer.data$id)
-  lik <- matrix(NA, nrow=num.individual, ncol=3)
-  
-  # penetrance length, oldest age in the penetrance table
-  length.pene <- nrow(penetrance.all$fMX)
-  
-  for(i in 1:num.individual){
-    if(fam.cancer.data$num.cancer[i]==0){
-      if(is.na(fam.cancer.data$gender[i])){
-        pene.mix <- (penetrance.all$fMX + penetrance.all$fFX)/2
-        lik[i,] <- lkNoneAffect(pene.mix, fam.cancer.data$age[i])
-      }
-      else{        
-        if(fam.cancer.data$gender[i]==1){
-          lik[i,] <- lkNoneAffect(penetrance.all$fMX, fam.cancer.data$age[i])
-        }
-        else{
-          lik[i,] <- lkNoneAffect(penetrance.all$fFX, fam.cancer.data$age[i])
-        }
-      }
+    ## Carrier probability calculation with MPC
+    if (is.null(penetrance.all)){
+      penetrance.all = parameter.mpc
     }
-    else{
-      flag.benign <- TRUE
-      for(j in 1:fam.cancer.data$num.cancer[i]){
-        if(fam.cancer.data$cancer.info[[i]]$cancer.type[j] < invasive.cut){
-          flag.benign <- FALSE
-          break
-        }
-      }
-      
-      if(flag.benign){
-        if(is.na(fam.cancer.data$gender[i])){
-          pene.mix <- (penetrance.all$fMX + penetrance.all$fFX)/2
-          lik[i,] <- lkNoneAffect(pene.mix, fam.cancer.data$age[i])
-        }
-        else{        
-          if(fam.cancer.data$gender[i]==1){
-            lik[i,] <- lkNoneAffect(penetrance.all$fMX, fam.cancer.data$age[i])
-          }
-          else{
-            lik[i,] <- lkNoneAffect(penetrance.all$fFX, fam.cancer.data$age[i])
-          }
-        }
-      }
-      else
-      {
-        age.tmp <- min(fam.cancer.data$cancer.info[[i]]$diag.age)
-        if(age.tmp < 1){
-          age.tmp = 1
-        }
-        if(age.tmp > length.pene){
-          age.tmp = length.pene
-        }
-        if(is.na(fam.cancer.data$gender[i])){
-          lik[i,] <- (penetrance.all$fMX[age.tmp,]+penetrance.all$fFX[age.tmp,])/2
-        }
-        else{
-          if(fam.cancer.data$gender[i]==1){
-            lik[i,] <- penetrance.all$fMX[age.tmp,]
-          }
-          else{
-            lik[i,] <- penetrance.all$fFX[age.tmp,]
-          }
-        }
-      }
-      
-      
+    data.obj <- convert.data(fam.cancer.data)
+    data.obj1 <- data.obj[[1]]
+    data.obj2 <- data.obj[[2]]
+    pp.tmp <- lfsproC.mpc(fam.cancer.data[[i]], penetrance.all, data.obj1[[i]],
+                          data.obj2[[i]], cid, allef, nloci, mRate) 
+    pp.all <- rbind(pp.all, pp.tmp)
+
+    ## risk prediction
+    cid_num.cancer <- fam.cancer.data[[i]]$num.cancer[which(fam.cancer.data[[i]]$id %in% cid)] 
+    cid.na <- cid[which(cid_num.cancer==0)] #counselee without previous cancers
+    cid.1 <- cid[which(cid_num.cancer>=1)] #counselee with previous primary cancer
+    
+    pp.na <- pp.tmp[which(cid_num.cancer==0),]
+    dim(pp.na) <- c(sum(cid_num.cancer==0), 3)
+    pp.1 <- pp.tmp[which(cid_num.cancer>=1),]
+    dim(pp.1) <- c(sum(cid_num.cancer>=1), 3)
+    
+    if (length(cid.na)>0){
+      risk.cs.temp <- risk.cs(fam.cancer.data[[i]], lfspenet.cs, cid.na, pp.na)
+    } else {
+      risk.cs.temp <- NULL
+    }
+    if (is.null(risk.cs.output)) {
+      risk.cs.output <- c(risk.cs.output, risk.cs.temp)
+    } else {
+      risk.cs.output <- Map(list,risk.cs.output,risk.cs.temp)
+    }
+    
+    if (length(cid.1)>0){
+      risk.mpc.temp <- risk.mpc(fam.cancer.data[[i]],cancer.data, cid.1, data.obj2[[i]], penetrance.all)
+      risk.mpc.output <- data.frame(risk.mpc.temp)
+      colnames(risk.mpc.output) <- c("fam.id", "ID", "age","5 years(wildtype)", "5 years(mutation)", 
+                              "10 years(wildtype)", "10 years(mutation)", "15 years(wildtype)", 
+                              "15 years(mutation)")
+      counselee.id[which(cid_num.cancer>=1),]
+      counselee.id.1 <- data.frame(fam.id=fam.cancer.data[[i]]$fam.id[1],id=cid.1)
+      risk.all <- combined.risk.mpc(pp.1, risk.mpc.output, counselee.id.1)
+      risk.mpc.final <- rbind(risk.mpc.final, risk.all)
     }
   }
-  
-  return(lik)
-}
-
-
-lkNoneAffect <- function(penetrance, age){
-  # calculate the likelihood for unaffected sample
-  # Args:
-  #   age: sample's age when he/she still doesn't get disease
-  #
-  # Returns:
-  #   likelihood
-  
-  length.pene <- nrow(penetrance)
-  if(age==0)
-  {
-    age <- 1
-  }
-  if(age > length.pene)
-  {
-    age <- length.pene
-  }
-  rlt <- rep(1,3)
-  rlt[1] <- 1-sum(penetrance[1:age,1])
-  rlt[2] <- 1-sum(penetrance[1:age,2])
-  rlt[3] <- 1-sum(penetrance[1:age,3])
-  #   for(i in 1:age){
-  #     rlt[1] <- rlt[1]*(1-penetrance[i,1])
-  #     rlt[2] <- rlt[2]*(1-penetrance[i,2])
-  #     rlt[3] <- rlt[3]*(1-penetrance[i,3])
-  #   }
-  rlt
+  pp <- 1 - pp.all[, 1]
+  rlt <- data.frame(cbind(counselee.id, pp), check.names = FALSE)
+  colnames(rlt) <- c("fam.id", "id", "mutation_probability")
+  output <- list(rlt, risk.cs.output, na.omit(risk.mpc.final))
+  names(output) <- c("Mutation_probability", "Cancer_specific_risks",
+                     "Multiple_primary_cancer_risks")
+  return(output)
 }
