@@ -29,7 +29,7 @@ risk.mpc <- function(fam.cancer.data, cancer.data, cid, data2, parameter){
   data.e <- data.d[!duplicated(data.d$ID),]
   for (i in 1:nrow(data.e)) { # output NA for counselee older than 80 or MPC already
     if (data.e$time[i] > 80|data.e$D[i] == 1) {
-      warning(paste0(famid," ID=",data.e$ID[i],": No multiple primary cancer risk predictions available for counselees with age over 80, never had or had multiple primary cancers!"))
+      print(paste0(famid," ID=",data.e$ID[i],": No multiple primary cancer risk predictions available for counselees with age over 80, never had or had multiple primary cancers!"))
       data.e[i,][3] <- NA
       data.e[i,][4] <- NA
       data.e[i,][5] <- NA
@@ -38,7 +38,7 @@ risk.mpc <- function(fam.cancer.data, cancer.data, cid, data2, parameter){
   }
   age.c <- fam.cancer.data$age[fam.cancer.data$id %in% data.e$ID] 
   if (all(is.na(data.d))){
-    warning(paste0(famid," ID=",unique(data.c$ID),": No multiple primary cancer risk predictions available!"))
+    print(paste0(famid," ID=",unique(data.c$ID),": No multiple primary cancer risk predictions available!"))
     lik <- as.matrix(cbind(famid, unique(data.c$ID), age.c, NA, NA, NA, 
                            NA, NA, NA, NA))
   } else {
