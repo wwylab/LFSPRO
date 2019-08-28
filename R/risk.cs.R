@@ -197,9 +197,17 @@ risk.cs <- function (fam.cancer.data, penetrance.all, counselee.id, posterior){
           }
         }
       }
-    breast <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, br.risk), check.names = FALSE)
-    sarcoma <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, sar.risk), check.names = FALSE)
-    others <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, other.risk), check.names = FALSE)
+    ## Invalid to predict cancer risks for patients with predicted ages beyond 80
+    pred_age_mat <- matrix(rep(ages,4),ncol = 4) + t(matrix(rep(seq(5,20,5),length(ages)), nrow = 4))
+    br.risk[which(pred_age_mat > 80)] <- NA
+    sar.risk[which(pred_age_mat > 80)] <- NA
+    other.risk[which(pred_age_mat > 80)] <- NA
+    #breast <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, br.risk), check.names = FALSE, stringsAsFactors = F)
+    breast <- cbind.data.frame(fam.id=unique(fam.id), counselee.id, ages, br.risk)
+    #sarcoma <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, sar.risk), check.names = FALSE, stringsAsFactors = F)
+    sarcoma <- cbind.data.frame(fam.id=unique(fam.id), counselee.id, ages, sar.risk)
+    #others <- data.frame(cbind(fam.id=unique(fam.id), counselee.id, ages, other.risk), check.names = FALSE, stringsAsFactors = F)
+    others <- cbind.data.frame(fam.id=unique(fam.id), counselee.id, ages, other.risk)
     output <- list(Breast_risks=breast, 
                    Sarcoma_risks=sarcoma, 
                    Other_cancers=others)

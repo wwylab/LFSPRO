@@ -100,7 +100,7 @@ combinedata <- function(fam.data, cancer.data){
                                  fid = fam.data.tmp$fid, 
                                  mid = fam.data.tmp$mid,
                                  gender = fam.data.tmp$gender, 
-                                 #vital = fam.data.tmp$vital,
+                                 vital = fam.data.tmp$vital,
                                  age = fam.data.tmp$age, 
                                  num.cancer = num.cancer,
                                  cancer.info = cancer.info)

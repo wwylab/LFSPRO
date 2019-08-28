@@ -1,0 +1,7 @@
+.Rhistory
+.RData
+inst/doc
+*.orig
+.env
+*.tex
+docs

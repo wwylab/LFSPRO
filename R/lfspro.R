@@ -20,6 +20,7 @@ lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
   num.cancer <- nrow(cancer.data) 
   cancer.type.num <- rep(-1, num.cancer)
   colnames(counselee.id) <- c("fam.id", "id")
+
   for(i in 1:num.cancer){
     tmp <- lfspro.cancer.type[cancer.data$cancer.type[i]]
     if(is.na(tmp)){
@@ -32,7 +33,7 @@ lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
       num.counselee <- nrow(counselee.id)
       pp <- rep(-1, num.counselee)
       
-      rlt <- data.frame(cbind(counselee.id, pp),check.names = FALSE)
+      rlt <- data.frame(cbind(counselee.id, pp),check.names = FALSE, stringsAsFactors = F)
       colnames(rlt) <- c("fam.id", "id", "pp")
       return(rlt)
     }
@@ -45,9 +46,27 @@ lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
   risk.mpc.output <- NULL
   risk.cs.output <- NULL
   risk.mpc.final <- data.frame()
+  invalid_counselee <- data.frame()
   pp.all <- NULL
+  counselee.id_new <- data.frame()
+  
   for(i in 1:num.fam){
-    cid <- counselee.id$id[counselee.id$fam.id == fam.cancer.data[[i]]$fam.id[1]]
+    cid_all <- counselee.id$id[counselee.id$fam.id == fam.cancer.data[[i]]$fam.id[1]]
+    cid <- cid_all[fam.cancer.data[[i]]$vital[which(fam.cancer.data[[i]]$id %in% cid_all)] == "A"]
+    if (length(cid_all)>length(cid)){
+      print("Some input counselee are dead. Details in Table invalid_counselee.")
+      cid_invalid <- cid_all[fam.cancer.data[[i]]$vital[which(fam.cancer.data[[i]]$id %in% cid_all)] == "D"]
+      invalid_counselee_tmp <- data.frame(ID=cid_invalid, 
+                                          fam=rep(fam.cancer.data[[i]]$fam.id[1],
+                                                  length(cid_invalid)))
+      invalid_counselee <- rbind(invalid_counselee, invalid_counselee_tmp)
+    }
+    
+    counselee.id_new_temp <- data.frame(ID=cid, 
+                                        fam=rep(fam.cancer.data[[i]]$fam.id[1],
+                                                length(cid)))
+    counselee.id_new <- rbind(counselee.id_new, counselee.id_new_temp)
+      
     if(length(cid)<1){
       print(paste("Cannot find any counselee id in family ", 
                   fam.cancer.data[[i]]$fam.id[1], sep=""))
@@ -74,7 +93,6 @@ lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
     dim(pp.na) <- c(sum(cid_num.cancer==0), 3)
     pp.1 <- pp.tmp[which(cid_num.cancer>=1),]
     dim(pp.1) <- c(sum(cid_num.cancer>=1), 3)
-    
     if (length(cid.na)>0){
       risk.cs.temp <- risk.cs(fam.cancer.data[[i]], lfspenet.cs, cid.na, pp.na)
     } else {
@@ -88,7 +106,7 @@ lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
     
     if (length(cid.1)>0){
       risk.mpc.temp <- risk.mpc(fam.cancer.data[[i]],cancer.data, cid.1, data.obj2[[i]], penetrance.all)
-      risk.mpc.output <- data.frame(risk.mpc.temp)
+      risk.mpc.output <- data.frame(risk.mpc.temp, stringsAsFactors = F)
       colnames(risk.mpc.output) <- c("fam.id", "ID", "age","5 years(wildtype)", "5 years(mutation)", 
                               "10 years(wildtype)", "10 years(mutation)", "15 years(wildtype)", 
                               "15 years(mutation)")
@@ -98,11 +116,12 @@ lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
       risk.mpc.final <- rbind(risk.mpc.final, risk.all)
     }
   }
+  #browser()
   pp <- 1 - pp.all[, 1]
-  rlt <- data.frame(cbind(counselee.id, pp), check.names = FALSE)
+  rlt <- data.frame(cbind(counselee.id_new, pp), check.names = FALSE, stringsAsFactors = F)
   colnames(rlt) <- c("fam.id", "id", "mutation_probability")
-  output <- list(rlt, risk.cs.output, na.omit(risk.mpc.final))
+  output <- list(rlt, risk.cs.output, na.omit(risk.mpc.final), invalid_counselee)
   names(output) <- c("Mutation_probability", "Cancer_specific_risks",
-                     "Multiple_primary_cancer_risks")
+                     "Multiple_primary_cancer_risks", "Invalid_counselee")
   return(output)
 }
