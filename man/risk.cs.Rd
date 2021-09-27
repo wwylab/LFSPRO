@@ -15,9 +15,10 @@
     Data frame storing family and cancer information. See \link{fam.cancer.data} for details.
   }
   \item{penetrance.all}{
- List. Two lists indicate the cancer-specific penetrances of male and female (fMX: male, fFX: female), respectively.
-For each list, it contains 4 of 110x3 penetrance matrices, row: from age 1 to age 110, column: three
-kinds of genotype: P530 (wild type, neither of allele mutated), P531 (one allele mutated in P53) and P532 (two allele mutated in P53). Each matrix represents one penetrance matrix of breast cancer, sarcoma, other cancers, and death, respectively. See \link{lfspenet.cs} for details.
+  List. Two lists indicate the cancer-specific penetrances of male and female (fMX: male, fFX: female), respectively.
+  For each list, it contains 4 of 110x3 penetrance matrices, row: from age 1 to age 110, column: three
+  kinds of genotype: P530 (wild type, neither of allele mutated), P531 (one allele mutated in P53) and P532 (two allele mutated in P53). Each matrix represents one penetrance matrix of breast cancer, sarcoma, other
+  cancers, and death, respectively. See \link{lfspenet.cs} for details.
   }
   \item{counselee.id}{Individual id for the counselee. If you want to estimate multiple samples at the same time, just set counselee.id as a vector of IDs for all the samples.}
   \item{posterior}{
@@ -28,7 +29,7 @@ kinds of genotype: P530 (wild type, neither of allele mutated), P531 (one allele
 }
 
 \author{
-  Jingxiao Chen
+  Nam Nguyen
 }
 \examples{
 nloci <- 1 
@@ -45,4 +46,3 @@ pp <- lfsproC.cs(fam.cancer.data[[1]], lfspenet.cs,
                  cid, allef, nloci, mRate)
 risk.cs(fam.cancer.data[[1]], lfspenet.cs, cid, pp)
 }
-
