@@ -1,22 +1,8 @@
 lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
                         allef=list(c(0.9994,0.0006)), nloci=1, mRate=0.00012){
-  # Aim: calculate the posterior probability of TP53 mutaitons on the basis of
-  #    family history
-  # Input:
-  #    fam.data: data frame. family information including fam.id(family id), id,
-  #      fid(father id), mid(mother id), gender(0: female, 1:male), 
-  #      vital(vital status, A: alive, D: dead), dob (date of birth)
-  #      dod (data of death), lcd (last contact date)
-  #    cancer.data: dara frame. cancer information including fam.id(family id),
-  #      id, diag.cancer(diagnosed cancer type), diag.date (diagnosed date)
-  #    penetrance.all: penetrance table
-  #    counselee.id: data frame. the family id and id for the counselees.
-  #    allef: alle frequency
-  #    nloci: number of loci
-  #    mRate: mutation rate
-  #    mode: type of LFS prediction model, "1st.all", "mpc" or "1st.cs"
-  #    Output: the posterior probability as a TP53 mutation carrier for each counselees
-
+  fam.data <- fam.data[order(fam.data$fam.id, fam.data$id),]
+  cancer.data <- cancer.data[order(cancer.data$fam.id, cancer.data$id),]
+  
   num.cancer <- nrow(cancer.data) 
   cancer.type.num <- rep(-1, num.cancer)
   colnames(counselee.id) <- c("fam.id", "id")
@@ -105,13 +91,13 @@ lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
     }
     
     if (length(cid.1)>0){
-      risk.mpc.temp <- risk.mpc(fam.cancer.data[[i]],cancer.data, cid.1, data.obj2[[i]], penetrance.all)
+      risk.mpc.temp <- risk.mpc(fam.cancer.data[[i]], cid.1, penetrance.all)
       risk.mpc.output <- data.frame(risk.mpc.temp, stringsAsFactors = F)
-      colnames(risk.mpc.output) <- c("fam.id", "ID", "age","5 years(wildtype)", "5 years(mutation)", 
-                              "10 years(wildtype)", "10 years(mutation)", "15 years(wildtype)", 
-                              "15 years(mutation)")
+      colnames(risk.mpc.output) <- c("fam.id", "id", "age", "gender", "first.cancer",
+                                     "5 years (wildtype)", "10 years(wildtype)", "15 years (wildtype)", 
+                                     "5 years (mutation)", "10 years(mutation)", "15 years (mutation)")
       counselee.id[which(cid_num.cancer>=1),]
-      counselee.id.1 <- data.frame(fam.id=fam.cancer.data[[i]]$fam.id[1],id=cid.1)
+      counselee.id.1 <- data.frame(fam.id=fam.cancer.data[[i]]$fam.id[1], id=cid.1)
       risk.all <- combined.risk.mpc(pp.1, risk.mpc.output, counselee.id.1)
       risk.mpc.final <- rbind(risk.mpc.final, risk.all)
     }
