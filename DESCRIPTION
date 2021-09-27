@@ -2,10 +2,10 @@ Package: LFSPRO
 Type: Package
 Title: TP53 germline mutation carrier estimation and cancer risk
         predictions
-Version: 2.0.1
-Date: 2019-06-11
-Author: Gang Peng, Seung Jun Shin, Jingxiao Chen, Wenyi Wang
-Maintainer: Wenyi Wang <wwang7@mdanderson.org>
+Version: 2.0.3
+Date: 2021-09-20
+Author: Gang Peng, Seung Jun Shin, Wenyi Wang
+Maintainer: Wenyi Wang <wwang7@mdanderson.org>, Nam Nguyen <hn17@rice.edu>
 Description: TP53 germline mutations are the main cause of Li-Fraumeni syndrome. This package is designed to estimate probabilities that:  1) the counselee is a TP53 germline mutation carrier, 2) the counselee develops any cancer in future, 3) the counselee develops breast cancer, sarcoma or any other cancers in future, 4) the counselee develops a first or second primary cancer in future, on the basis of his/her family cancer history. The package also provides functions for using the LFS classic and Chompret criteria.
 LazyData: true
 Lazyload: true
