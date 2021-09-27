@@ -11,28 +11,30 @@ TP53 germline mutations are the main cause of Li-Fraumeni syndrome. This package
 \tabular{ll}{
 Package: \tab LFSPRO\cr
 Type: \tab Package\cr
-Version: \tab 2.0.0\cr
-Date: \tab 2018-12-04\cr
+Version: \tab 2.0.3\cr
+Date: \tab 2021-09-20\cr
 License: \tab GPL-3 \cr
 }
 }
 \author{
-Gang Peng, SeungJun Shin, Jingxiao Chen, Wenyi Wang
+Gang Peng, SeungJun Shin, Jingxiao Chen, Nam Nguyen, Wenyi Wang
 
-Maintainer: Wenyi Wang <wwang7@mdanderson.org>
+Maintainer: Wenyi Wang <wwang7@mdanderson.org>, Nam Nguyen <hn17@rice.edu>
 }
 \references{
-Peng, G., Bojadzieva, J., Ballinger, M. L., Li, J., Blackford, A. L., Mai, P. L., Savage, S. A., Thomas, D. M., Strong, L. C., … Wang, W. (2017). Estimating TP53 Mutation Carrier Probability in Families with Li-Fraumeni Syndrome Using LFSPRO. \emph{Cancer Epidemiology, Biomarker and Prevention}, \bold{26(6)}, 837-844. DOI: 10.1158/1055-9965.EPI-16-0695
+Peng, G., Bojadzieva, J., Ballinger, M. L., Li, J., Blackford, A. L., Mai, P. L., Savage, S. A., Thomas, D. M., Strong, L. C., â¦ Wang, W. (2017). Estimating TP53 Mutation Carrier Probability in Families with Li-Fraumeni Syndrome Using LFSPRO. \emph{Cancer Epidemiology, Biomarker and Prevention}, \bold{26(6)}, 837-844. DOI: 10.1158/1055-9965.EPI-16-0695
 
-Shin, S. J., Ning, J., Bojadzieva, J., Strong, L. C., and Wang, W. (2018). Bayesian estimation of a semiparametric recurrent event model with applications to the penetrance estimation of multiple primary cancers in Li-Fraumeni syndrome. \emph{Biostatistics}, 00, 1–16. https://doi.org/10.1093/biostatistics/kxy066
+Shin, S. J., Ning, J., Bojadzieva, J., Strong, L. C., and Wang, W. (2018). Bayesian estimation of a semiparametric recurrent event model with applications to the penetrance estimation of multiple primary cancers in Li-Fraumeni syndrome. \emph{Biostatistics}, 00, 1â16. https://doi.org/10.1093/biostatistics/kxy066
 
-Shin, S. J., Yuan, Y., Strong, L. C., Bojadzieva, J., and Wang, W. (2018). Bayesian Semiparametric Estimation of Cancer-Specific Age-at-Onset Penetrance With Application to Li-Fraumeni Syndrome. \emph{Journal of the American Statistical Association}, 1–12. https://doi.org/10.1080/01621459.2018.1482749
+Shin, S. J., Yuan, Y., Strong, L. C., Bojadzieva, J., and Wang, W. (2018). Bayesian Semiparametric Estimation of Cancer-Specific Age-at-Onset Penetrance With Application to Li-Fraumeni Syndrome. \emph{Journal of the American Statistical Association}, 1â12. https://doi.org/10.1080/01621459.2018.1482749
 
 Chen, S., Wang, W., Broman, K. and Parmigiani, G. (2004) BayesMendel: An R Environment for Mendelian Risk Prediction. \emph{Statistical Application in Genetics and Molecular Biology}, \bold{3(1):} Article 21. DOI: 10.2202/1544-6115.1063
 
 }
 
 \note{
+New features in 2.0.3: bugs fixed in risk.mpc and risk.cs functions. Simplify the parameter interface of risk.mpc.  
+
 New features in 2.0.1: lfspro.mode is replaced by lfspro, for simplicity, which estimates future cancer risks based on primary cancer history.  
 
 New features in 2.0.0: lfspro.mode is added to replace lfspro to account for additional utilities in cancer-specific and multiple primary cancer risk predictions. Simply specify parameter "mode" to call desired functions. 
