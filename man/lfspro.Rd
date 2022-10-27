@@ -7,7 +7,7 @@ Estimate TP53 mutation probability and predict cancer risk for families with Li-
 We use a Mendelian risk prediction model to estimate the probability of the counselee being a TP53 germline mutation carrier on the basis of his/her family cancer history. lfspro estimates TP53 carrier probability for every counselee but predicts cancer risks based on cancer history of counselee. If the counselee never had primary cancer, lfspro estimates cancer-specific risks. If the counselee had one primary cancer, lfspro estimates multiple primary cancer risks. If the counselee had multiple primary cancer, lfspro cannot predict cancer risks. 
 }
 \usage{
-  lfspro(fam.data, cancer.data, counselee.id, penetrance.all, allef, nloci,mRate)
+  lfspro(fam.data, cancer.data, counselee.id, penetrance.all, method, allef, nloci,mRate)
 }
 \arguments{
   \item{fam.data}{
@@ -23,6 +23,9 @@ We use a Mendelian risk prediction model to estimate the probability of the coun
     Penetrance data by default for each mode. \link{lfspenet.2010} is for predicting the probability of carrying TP53 germline mutatio, \link{lfspenet.cs} is used in cancer
     -specific risk prediction model and \link{parameter.mpc} is multiple primary cancer model parameter.
   }
+  \item{method}{
+    The model used to calculate TP53 mutation probabilities. The default is "MPC", but can be switched to "CS".
+  } 
   \item{allef}{
     List. Allele frequency for each locus/gene. If there is only one gene and two alleles in the gene (allele frequency is 0.1 and 0.9
     ), allef = list(c(0.1,0.9)), If there are two genes,two alleles (allele frequency is 0.1 and 0.9) for gene 1  and three alleles 
@@ -55,7 +58,7 @@ Chen, S., Wang, W., Broman, K. and Parmigiani, G. (2004) BayesMendel: An R Envir
 }
 
 \author{
-  Gang Peng, Seung Jun Shin, Jingxiao Chen, Wenyi Wang
+  Gang Peng, Seung Jun Shin, Jingxiao Chen, Nam Nguyen, Wenyi Wang
 }
 
 

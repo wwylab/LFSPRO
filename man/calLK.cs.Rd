@@ -25,7 +25,7 @@ Return a n*3 matrix. The likelihood of observing the cancer outcome given genoty
 Shin, S. J., Yuan, Y., Strong, L. C., Bojadzieva, J., and Wang, W. (2018). Bayesian Semiparametric Estimation of Cancer-Specific Age-at-Onset Penetrance With Application to Li-Fraumeni Syndrome. \emph{Journal of the American Statistical Association}, 1–12. https://doi.org/10.1080/01621459.2018.1482749
 }
 \author{
-  Seung Jun Shin
+  Seung Jun Shin, Nam Nguyen
 }
 
 \seealso{

@@ -24,7 +24,7 @@ Return a n*3 matrix. The likelihood of observing the cancer outcome given genoty
 Shin, S. J., Ning, J., Bojadzieva, J., Strong, L. C., and Wang, W. (2018). Bayesian estimation of a semiparametric recurrent event model with applications to the penetrance estimation of multiple primary cancers in Li-Fraumeni syndrome. \emph{Biostatistics}, 00, 1–16. https://doi.org/10.1093/biostatistics/kxy066
 }
 \author{
-  Seung Jun Shin
+  Seung Jun Shin, Nam Nguyen
 }
 
 \seealso{
