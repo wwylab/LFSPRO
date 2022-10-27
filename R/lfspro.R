@@ -1,4 +1,4 @@
-lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
+lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL, method="MPC",
                         allef=list(c(0.9994,0.0006)), nloci=1, mRate=0.00012){
   fam.data <- fam.data[order(fam.data$fam.id, fam.data$id),]
   cancer.data <- cancer.data[order(cancer.data$fam.id, cancer.data$id),]
@@ -66,8 +66,14 @@ lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
     data.obj <- convert.data(fam.cancer.data)
     data.obj1 <- data.obj[[1]]
     data.obj2 <- data.obj[[2]]
-    pp.tmp <- lfsproC.mpc(fam.cancer.data[[i]], penetrance.all, data.obj1[[i]],
-                          data.obj2[[i]], cid, allef, nloci, mRate) 
+    pp.mpc.tmp <- lfsproC.mpc(fam.cancer.data[[i]], penetrance.all, data.obj1[[i]],
+                              data.obj2[[i]], cid, allef, nloci, mRate) 
+    pp.cs.tmp <- lfsproC.cs(fam.cancer.data[[1]], lfspenet.cs, cid, allef, nloci, mRate)
+    if (method == "CS") {
+      pp.tmp <- pp.cs.tmp
+    } else {
+      pp.tmp <- pp.mpc.tmp
+    }
     pp.all <- rbind(pp.all, pp.tmp)
 
     ## risk prediction
@@ -111,3 +117,4 @@ lfspro <- function(fam.data, cancer.data, counselee.id, penetrance.all=NULL,
                      "Multiple_primary_cancer_risks", "Invalid_counselee")
   return(output)
 }
+
