@@ -1,19 +1,18 @@
-calLK.mpc <- function(data1, data2, parameter)
-{
+calLK.mpc <- function(data1, data2, parameter) {
   beta <- parameter$beta
   gamma <- parameter$gamma
   
   M <- length(gamma)
   
-  time <- data2[,2]
+  time <- data2$time
   time[time > 80 - 1.0e-8] <- 80
-  id <- data2[,1]
+  id <- data2$id
   time[time == 0] <- 1.0e-12
   
   tilde.t <- time/80
-  gender <- data2[,3]
-  d      <- data2[,5]
-  dp     <- data2[,6]
+  gender <- data2$gender
+  d <- data2$D
+  dp <- data2$Dp
   
   n2 <- length(time)
   
@@ -40,8 +39,8 @@ calLK.mpc <- function(data1, data2, parameter)
   xpbeta.test0.f <- xp.test0.f %*% beta
   xpbeta.test1.f <- xp.test1.f %*% beta
   
-  Lambda <- (Ft %*% gamma)         # cumulative baseline
-  lambda <- (ft %*% gamma)/80# baseline
+  Lambda <- (Ft %*% gamma)   
+  lambda <- (ft %*% gamma)/80
   
   unique.id <- unique(id)
   diff.Lambda <- NULL
@@ -89,7 +88,7 @@ calLK.mpc <- function(data1, data2, parameter)
   lik <- cbind(exp(llike0), exp(llike1), exp(llike1))
   
   for (i in 1:nrow(lik)) {
-    mut <- data2[which(data2[,1] == unique.id[i])[1],4]
+    mut <- data2$test[which(id == unique.id[i])[1]]
     if (!is.na(mut)) {
       if (mut == 0) {
         lik[i,2:3] <- 0 
