@@ -55,21 +55,6 @@ combinedata <- function(fam.data, cancer.data){
     
     num.ind.tmp <- length(fam.data.tmp$fam.id)
     
-#     age <- 1:num.ind.tmp
-#     for(j in 1:num.ind.tmp){
-#       if(fam.data.tmp$vital[j]=="A"){
-#         age[j] = calAge(fam.data.tmp$lcd[j],fam.data.tmp$dob[j])
-#       }
-#       else{
-#         age[j] = calAge(fam.data.tmp$dod[j],fam.data.tmp$dob[j])
-#       }
-#     }
-#     
-#     if(sum(is.na(age))>0){
-#       print(paste("Errors in age for sample ", fam.data.tmp$fam.id[is.na(age)], 
-#                   fam.data.tmp$id[is.na(age)],sep=" "))
-#     }
-    
     cancer.info <- list(num.ind.tmp)
     uniq.id.fam <- paste(fam.data.tmp$fam.id,fam.data.tmp$id,sep="")
     uniq.id.cancer <- paste(cancer.data.tmp$fam.id,cancer.data.tmp$id,sep="")
@@ -78,19 +63,12 @@ combinedata <- function(fam.data, cancer.data){
       index <- uniq.id.cancer %in% uniq.id.fam[j]
       num.cancer.tmp <- sum(index)
       num.cancer[j] <- num.cancer.tmp
-      if(num.cancer.tmp > 0){
+      if(num.cancer.tmp > 0) {
         cancer.type <- cancer.data.tmp$cancer.type[index]
-        #diag.date <- cancer.data.tmp$diag.date[index]
         diag.age <- cancer.data.tmp$diag.age[index]
-#         diag.age <- rep(0,num.cancer.tmp)
-#         for(k in 1:num.cancer.tmp){
-#           diag.age[k] <- calAge(diag.date[k], fam.data.tmp$dob[j])
-#         }
         
         cancer.info[[j]] <- data.frame(cancer.type,diag.age)
-      }
-      else
-      {
+      } else {
         cancer.info[[j]] <- data.frame()
       }
     }
@@ -100,6 +78,7 @@ combinedata <- function(fam.data, cancer.data){
                                  fid = fam.data.tmp$fid, 
                                  mid = fam.data.tmp$mid,
                                  gender = fam.data.tmp$gender, 
+                                 test = fam.data.tmp$test,
                                  vital = fam.data.tmp$vital,
                                  age = fam.data.tmp$age, 
                                  num.cancer = num.cancer,
