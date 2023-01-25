@@ -9,13 +9,14 @@ This built-in family information dataset is used to demonstrate the examples of 
 }
 \usage{fam.data}
 \format{
-  A data frame containing 9 variables.
+  A data frame containing 8 variables.
   \describe{
     \item{\code{fam.id}}{family id}
     \item{\code{id}}{individual id}
     \item{\code{fid}}{father id}
     \item{\code{mid}}{mother id}
     \item{\code{gender}}{sex. 0: female, 1: male}
+    \item{\code{test}}{mutation status. 0: wildtype, 1: mutation}
     \item{\code{age}}{If the individual was alive at the last contact date, use the age at that time. otherwise, use the age at death. Note: do not record age at diagnosis, which shoule be recorded in cancer.data}
     \item{\code{vital}}{Vital sign. D: death, A: alive}
   }
