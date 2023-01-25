@@ -1,5 +1,6 @@
-lfsproC.mpc <- function (data1, data2, counselee.id, parameter, allef, nloci, mRate) {
-  lik <- calLK.mpc(data1, data2, parameter)
+lfsproC.mpc <- function (data1, data2, counselee.id, parameter, 
+                         allef, nloci, mRate, mut.info = TRUE) {
+  lik <- calLK.mpc(data1, data2, parameter, mut.info)
   id <- as.integer(data1$id)
   fid <- as.integer(data1$fid)
   mid <- as.integer(data1$mid)
