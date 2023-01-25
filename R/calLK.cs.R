@@ -67,6 +67,14 @@ calLK.cs <- function (data1, data2, penetrance.all) {
         }
       }
     }
+    mut <- data2.i$test[1]
+    if (!is.na(mut)) {
+      if (mut == 0) {
+        lik[i,2:3] <- 0 
+      } else if (mut == 1) {
+        lik[i,1] <- 0
+      }
+    }
   }
   return(lik)
 }
