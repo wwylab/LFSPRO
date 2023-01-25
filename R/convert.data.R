@@ -42,7 +42,7 @@ convert.data <- function(fam.cancer.data)
     
     temp.result <- cbind(id, time, gender, test, D, Dp)
     colnames(temp.result) <- c("ID", "time", "gender", "test", "D", "Dp")
-    data.obj2[[i]] <- temp.result
+    data.obj2[[i]] <- data.frame(temp.result)
     }
   
   obj <- list(data.obj1 = data.obj1, data.obj2 = data.obj2)
