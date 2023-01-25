@@ -20,16 +20,9 @@
 }
 
 \author{
-  Seung Jun Shin
+  Seung Jun Shin, Nam Nguyen
 }
 \examples{
   fam.cancer.data <- combinedata(fam.data, cancer.data)
   data.obj <- convert.data(fam.cancer.data)
 }
-
-
-
-
-
-
-
