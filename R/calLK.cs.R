@@ -1,4 +1,4 @@
-calLK.cs <- function (data1, data2, penetrance.all, mut.info) {
+calLK.cs <- function (data1, data2, penetrance.all, mut.info = TRUE) {
   invasive.cut <- 99
   id <- data1$id
   num.individual <- length(id)
