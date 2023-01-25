@@ -1,5 +1,6 @@
-lfsproC.cs <- function (data1, data2, counselee.id, penetrance.all, allef, nloci, mRate) {
-  lik <- calLK.cs(data1, data2, penetrance.all)
+lfsproC.cs <- function (data1, data2, counselee.id, penetrance.all, 
+                        allef, nloci, mRate, mut.info = TRUE) {
+  lik <- calLK.cs(data1, data2, penetrance.all, mut.info)
   id <- as.integer(data1$id)
   fid <- as.integer(data1$fid)
   mid <- as.integer(data1$mid)
