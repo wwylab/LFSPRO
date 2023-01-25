@@ -1,13 +1,8 @@
-#fam.cancer.data <- fam.cancer.data[[1]]
-#counselee.id <- cid
-lfsproC.cs <- 
-function (fam.cancer.data, penetrance.all, counselee.id, allef, 
-          nloci, mRate) 
-{
-  lik <- calLK.cs(fam.cancer.data, penetrance.all)
-  id <- as.integer(fam.cancer.data$id)
-  fid <- as.integer(fam.cancer.data$fid)
-  mid <- as.integer(fam.cancer.data$mid)
+lfsproC.cs <- function (data1, data2, counselee.id, penetrance.all, allef, nloci, mRate) {
+  lik <- calLK.cs(data1, data2, penetrance.all)
+  id <- as.integer(data1$id)
+  fid <- as.integer(data1$fid)
+  mid <- as.integer(data1$mid)
   counselee.id <- as.integer(counselee.id)
   if (min(id) == 0) {
     id <- id + 1
@@ -17,7 +12,7 @@ function (fam.cancer.data, penetrance.all, counselee.id, allef,
   }
   fid[is.na(fid)] <- 0
   mid[is.na(mid)] <- 0
-  ped <- data.frame(ID = id, Gender = fam.cancer.data$gender, 
+  ped <- data.frame(ID = id, Gender = 2-data1$gender, 
                     FatherID = fid, MotherID = mid, stringsAsFactors = FALSE)
   pp <- peelingRC(allef, lik, ped, counselee.id, nloci, mRate)
   return(pp)
