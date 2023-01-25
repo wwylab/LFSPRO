@@ -7,13 +7,20 @@
 Calculate the likelihood (Pr(D|G), the probability of disease status D given the genotype G for each individual in the family.
 }
 \usage{
-  calLK.mpc(data1, data2, parameter)
+  calLK.mpc(data1, data2, parameter, mut.info = TRUE)
 }
 \arguments{
-  \item{data1}{sex, father ID and mother ID}
-  \item{data2}{age of diagnosis, sex and multiple primary cancers index}
+  \item{data1}{
+    Family data that describe how the individuals are related, for \emph{ONE FAMILY ONLY}.
+  }
+  \item{data2}{
+    A comprehensive dataset that describes each individual in details, including age, gender (1 for male, 2 for female), mutation status (0 for wildtype, 1 for mutation, NA if unknown), vital status (A if alive, D if dead), and cancer history (cancer type and age at diagnosis). Both data1 and data2 can be generated from family and cancer datasets using \link{combinedata} and \link{convert.data}. See the example below.
+  }
   \item{parameter}{
     Parameter estimates for semiparametric recurrent event model of multiple primary cancers. See \link{parameter.mpc} for details.
+  }
+  \item{mut.info}{
+    Set to TRUE (default) if you want to use known genetic testing results of family members in the calculation of mutation probabilities. Set to FALSE otherwise. 
   }
 }
 
@@ -31,10 +38,9 @@ Shin, S. J., Ning, J., Bojadzieva, J., Strong, L. C., and Wang, W. (2018). Bayes
   \code{\link{lfsproC.mpc}}
 }
 \examples{
-  fam.cancer.data <- combinedata(fam.data, cancer.data)
-  data.obj <- convert.data(fam.cancer.data)
-  data.obj1 <- data.obj[[1]]
-  data.obj2 <- data.obj[[2]]
-  calLK.mpc(data.obj1[[2]], data.obj2[[2]], parameter.mpc)
+fam.cancer.data <- combinedata(fam.data, cancer.data)
+data.obj <- convert.data(fam.cancer.data)
+data.obj1 <- data.obj[[1]]
+data.obj2 <- data.obj[[2]]
+calLK.mpc(data.obj1[[1]], data.obj2[[1]], parameter.mpc)
 }
-
