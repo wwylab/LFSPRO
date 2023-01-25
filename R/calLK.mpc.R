@@ -1,4 +1,4 @@
-calLK.mpc <- function(data1, data2, parameter, mut.info) {
+calLK.mpc <- function(data1, data2, parameter, mut.info = TRUE) {
   beta <- parameter$beta
   gamma <- parameter$gamma
   
