@@ -1,4 +1,4 @@
-calLK.mpc <- function(data1, data2, parameter) {
+calLK.mpc <- function(data1, data2, parameter, mut.info) {
   beta <- parameter$beta
   gamma <- parameter$gamma
   
@@ -87,13 +87,15 @@ calLK.mpc <- function(data1, data2, parameter) {
   
   lik <- cbind(exp(llike0), exp(llike1), exp(llike1))
   
-  for (i in 1:nrow(lik)) {
-    mut <- data2$test[which(id == unique.id[i])[1]]
-    if (!is.na(mut)) {
-      if (mut == 0) {
-        lik[i,2:3] <- 0 
-      } else if (mut == 1) {
-        lik[i,1] <- 0
+  if (mut.info == TRUE) {
+    for (i in 1:nrow(lik)) {
+      mut <- data2$test[which(id == unique.id[i])[1]]
+      if (!is.na(mut)) {
+        if (mut == 0) {
+          lik[i,2:3] <- 0 
+        } else if (mut == 1) {
+          lik[i,1] <- 0
+        }
       }
     }
   }
