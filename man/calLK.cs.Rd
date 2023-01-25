@@ -7,14 +7,20 @@
 Calculate the likelihood (Pr(D|G), probability of disease status D given the genotype G for each individual in the family.
 }
 \usage{
-  calLK.cs(fam.cancer.data, penetrance.all)
+  calLK.cs(data1, data2, penetrance.all, mut.info = TRUE)
 }
 \arguments{
-  \item{fam.cancer.data}{
-    Data including family information and cancer information. See \link{fam.cancer.data} for details.
+  \item{data1}{
+    Family data that describe how the individuals are related, for \emph{ONE FAMILY ONLY}.
+  }
+  \item{data2}{
+    A comprehensive dataset that describes each individual in details, including age, gender (1 for male, 2 for female), mutation status (0 for wildtype, 1 for mutation, NA if unknown), vital status (A if alive, D if dead), and cancer history (cancer type and age at diagnosis). Both data1 and data2 can be generated from family and cancer datasets using \link{combinedata} and \link{convert.data}. See the example below.
   }
   \item{penetrance.all}{
     The penetrance of three genotype (wild type, one copy and two copies of TP53 mutated alleles) for male and female in the population. See \link{lfspenet.cs} for details.
+  }
+  \item{mut.info}{
+    Set to TRUE (default) if you want to use known genetic testing results of family members in the calculation of mutation probabilities. Set to FALSE otherwise. 
   }
 }
 
@@ -32,8 +38,9 @@ Shin, S. J., Yuan, Y., Strong, L. C., Bojadzieva, J., and Wang, W. (2018). Bayes
   \code{\link{lkNoneAffect.cs}}, \code{\link{lfsproC.cs}}, \code{\link{peelingRC}}
 }
 \examples{
-cancer.data$cancer.type <- c(2,4,3,7,2,2,6,50,50,2,4,50,50,4,50) #cancer types
 fam.cancer.data <- combinedata(fam.data, cancer.data)
-calLK.cs(fam.cancer.data[[1]], lfspenet.cs)
+data.obj <- convert.data(fam.cancer.data)
+data.obj1 <- data.obj[[1]]
+data.obj2 <- data.obj[[2]]
+calLK.cs(data.obj1[[1]], data.obj2[[1]], lfspenet.cs)
 }
-
