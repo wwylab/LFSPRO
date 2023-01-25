@@ -1,9 +1,8 @@
-lfsproC.mpc <- function (fam.cancer.data, parameter, data1, data2, counselee.id, allef, nloci, mRate) 
-  {
-  lik <- calLK.mpc(data1, data2, parameter) #calLK.mpc(fam.cancer.data, penetrance.all)
-  id <- as.integer(fam.cancer.data$id)
-  fid <- as.integer(fam.cancer.data$fid)
-  mid <- as.integer(fam.cancer.data$mid)
+lfsproC.mpc <- function (data1, data2, counselee.id, parameter, allef, nloci, mRate) {
+  lik <- calLK.mpc(data1, data2, parameter)
+  id <- as.integer(data1$ID)
+  fid <- as.integer(data1$FatherID)
+  mid <- as.integer(data1$MotherID)
   counselee.id <- as.integer(counselee.id)
   if (min(id) == 0) {
     id <- id + 1
@@ -13,7 +12,7 @@ lfsproC.mpc <- function (fam.cancer.data, parameter, data1, data2, counselee.id,
   }
   fid[is.na(fid)] <- 0
   mid[is.na(mid)] <- 0
-  ped <- data.frame(ID = id, Gender = fam.cancer.data$gender, 
+  ped <- data.frame(ID = id, Gender = 2-data1$Gender, 
                     FatherID = fid, MotherID = mid, stringsAsFactors = FALSE)
   #browser()
   pp <- peelingRC(allef, lik, ped, counselee.id, nloci, mRate)
