@@ -28,7 +28,7 @@ A list. Each component in the list stores the family and cancer information for 
 }
 
 \author{
-Gang Peng
+Gang Peng, Nam Nguyen
 }
 
 \seealso{
