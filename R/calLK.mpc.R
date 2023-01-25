@@ -28,7 +28,6 @@ calLK.mpc <- function(data1, data2, parameter)
   test0 <- rep(0, n2)
   test1 <- rep(1, n2)
   
-  
   xp.test0.m <- cbind(test0, rep(1, n2), rep(1, n2) * test0, dp, dp * test0)
   xp.test1.m <- cbind(test1, rep(1, n2), rep(1, n2) * test1, dp, dp * test1)
   
@@ -62,7 +61,6 @@ calLK.mpc <- function(data1, data2, parameter)
   log.L0.f <- diff.Lambda * exp(xpbeta.test0.f)
   log.L1.f <- diff.Lambda * exp(xpbeta.test1.f)
   
-  
   llike0 <- llike1 <- NULL
   for (ii in unique.id) {
     temp.id <- which(id == ii)
@@ -89,6 +87,17 @@ calLK.mpc <- function(data1, data2, parameter)
   }
   
   lik <- cbind(exp(llike0), exp(llike1), exp(llike1))
+  
+  for (i in 1:nrow(lik)) {
+    mut <- data2[which(data2[,1] == unique.id[i])[1],4]
+    if (!is.na(mut)) {
+      if (mut == 0) {
+        lik[i,2:3] <- 0 
+      } else if (mut == 1) {
+        lik[i,1] <- 0
+      }
+    }
+  }
   
   return(lik)
 }
