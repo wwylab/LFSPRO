@@ -7,7 +7,7 @@ Estimate TP53 mutation probability and predict cancer risk for families with Li-
 We use a Mendelian risk prediction model to estimate the probability of the counselee being a TP53 germline mutation carrier on the basis of his/her family cancer history. lfspro estimates TP53 carrier probability for every counselee but predicts cancer risks based on cancer history of counselee. If the counselee never had primary cancer, lfspro estimates cancer-specific risks. If the counselee had one primary cancer, lfspro estimates multiple primary cancer risks. If the counselee had multiple primary cancer, lfspro cannot predict cancer risks. 
 }
 \usage{
-  lfspro(fam.data, cancer.data, counselee.id, penetrance.all, method, allef, nloci,mRate)
+  lfspro(fam.data, cancer.data, counselee.id, method, allef, nloci, mRate, mut.info)
 }
 \arguments{
   \item{fam.data}{
@@ -19,23 +19,22 @@ We use a Mendelian risk prediction model to estimate the probability of the coun
     \item{counselee.id}{
     Data frame including two variables: fam.id (family id of counselees) and id (individual id of counselees).
   }
-  \item{penetrance.all}{
-    Penetrance data by default for each mode. \link{lfspenet.2010} is for predicting the probability of carrying TP53 germline mutatio, \link{lfspenet.cs} is used in cancer
-    -specific risk prediction model and \link{parameter.mpc} is multiple primary cancer model parameter.
-  }
   \item{method}{
     The model used to calculate TP53 mutation probabilities. The default is "MPC", but can be switched to "CS".
   } 
   \item{allef}{
     List. Allele frequency for each locus/gene. If there is only one gene and two alleles in the gene (allele frequency is 0.1 and 0.9
     ), allef = list(c(0.1,0.9)), If there are two genes,two alleles (allele frequency is 0.1 and 0.9) for gene 1  and three alleles 
-    (allele frequncy is 0.2, 0.2 and 0.6) for gene 2, allef = list(c(0.1,0.9),c(0.2,0.2,0.6)). We suggeste to use list(c(1-maf,maf)). We set it as allef=list(c(0.9994,0.0006)) by default. 
+    (allele frequncy is 0.2, 0.2 and 0.6) for gene 2, allef = list(c(0.1,0.9),c(0.2,0.2,0.6)). We suggeste to use list(c(1-maf,maf)). We set it as allef = list(c(0.9994,0.0006)) by default. 
   }
   \item{nloci}{
     Number of loci/genes in the model. It's set to be 1 here.
   }
   \item{mRate}{
     Mutation rate. We set it as 0.00012 by default.
+  }
+  \item{mut.info}{
+    Set to TRUE (default) if you want to use known genetic testing results of family members in the calculation of mutation probabilities. Set to FALSE otherwise. 
   }
 }
 
@@ -68,4 +67,3 @@ id <- c(9,0,2,100,200)
 counselee.id <- data.frame(fam.id, id)
 lfspro(fam.data, cancer.data, counselee.id)
 }
-
