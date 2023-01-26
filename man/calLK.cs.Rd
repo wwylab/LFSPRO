@@ -7,13 +7,10 @@
 Calculate the likelihood (Pr(D|G), probability of disease status D given the genotype G for each individual in the family.
 }
 \usage{
-  calLK.cs(data1, data2, penetrance.all, mut.info = TRUE)
+  calLK.cs(ind.data, penetrance.all, mut.info)
 }
 \arguments{
-  \item{data1}{
-    Family data that describe how the individuals are related, for \emph{ONE FAMILY ONLY}.
-  }
-  \item{data2}{
+  \item{ind.data}{
     A comprehensive dataset that describes each individual in details, including age, gender (1 for male, 2 for female), mutation status (0 for wildtype, 1 for mutation, NA if unknown), vital status (A if alive, D if dead), and cancer history (cancer type and age at diagnosis). Both data1 and data2 can be generated from family and cancer datasets using \link{combinedata} and \link{convert.data}. See the example below.
   }
   \item{penetrance.all}{
@@ -42,5 +39,5 @@ fam.cancer.data <- combinedata(fam.data, cancer.data)
 data.obj <- convert.data(fam.cancer.data)
 data.obj1 <- data.obj[[1]]
 data.obj2 <- data.obj[[2]]
-calLK.cs(data.obj1[[1]], data.obj2[[1]], lfspenet.cs)
+calLK.cs(data.obj2[[1]], lfspenet.cs)
 }
