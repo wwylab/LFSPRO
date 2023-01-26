@@ -1,18 +1,18 @@
-calLK.mpc <- function(data1, data2, parameter, mut.info = TRUE) {
+calLK.mpc <- function(ind.data, parameter, mut.info = TRUE) {
   beta <- parameter$beta
   gamma <- parameter$gamma
   
   M <- length(gamma)
   
-  time <- data2$time
+  time <- ind.data$time
   time[time > 80 - 1.0e-8] <- 80
-  id <- data2$id
+  id <- ind.data$id
   time[time == 0] <- 1.0e-12
   
   tilde.t <- time/80
-  gender <- data2$gender
-  d <- data2$D
-  dp <- data2$Dp
+  gender <- ind.data$gender
+  d <- ind.data$D
+  dp <- ind.data$Dp
   
   n2 <- length(time)
   
@@ -89,7 +89,7 @@ calLK.mpc <- function(data1, data2, parameter, mut.info = TRUE) {
   
   if (mut.info == TRUE) {
     for (i in 1:nrow(lik)) {
-      mut <- data2$test[which(id == unique.id[i])[1]]
+      mut <- ind.data$test[which(id == unique.id[i])[1]]
       if (!is.na(mut)) {
         if (mut == 0) {
           lik[i,2:3] <- 0 
