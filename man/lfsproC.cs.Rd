@@ -7,14 +7,14 @@ Calculate the posterior probability of p53 mutations for cancer-specific risk pr
 lfsproC.cs is used to calculate posterior probability of p53 mutation based on cancer-specific risk prediction model specifically integrated counselees' family cancer history. 
 }
 \usage{
-  lfsproC.cs(data1, data2, counselee.id, penetrance.all, allef, nloci, mRate, mut.info = TRUE) 
+  lfsproC.cs(family.data, ind.data, counselee.id, penetrance.all, allef, nloci, mRate, mut.info) 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{data1}{
+  \item{family.data}{
     Family data that describe how the individuals are related, for \emph{ONE FAMILY ONLY}.
   }
-  \item{data2}{
+  \item{ind.data}{
     A comprehensive dataset that describes each individual in details, including age, gender (1 for male, 2 for female), mutation status (0 for wildtype, 1 for mutation, NA if unknown), vital status (A if alive, D if dead), and cancer history (cancer type and age at diagnosis). Both data1 and data2 can be generated from family and cancer datasets using \link{combinedata} and \link{convert.data}. See the example below.
   }
   \item{counselee.id}{
