@@ -7,14 +7,14 @@ Calculate the posterior probability of p53 mutations for multiple primary cancer
 lfsproC.mpc is used to calculate posterior probability of p53 mutation based on prediciting multiple primary cancer model specifically on the baisis of counselees' family cancer history. 
 }
 \usage{
-  lfsproC.mpc(data1, data2, counselee.id, parameter, allef, nloci, mRate, mut.info = TRUE)
+  lfsproC.mpc(family.data1, ind.data, counselee.id, parameter, allef, nloci, mRate, mut.info)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{data1}{
+  \item{family.data}{
     Family data that describe how the individuals are related, for \emph{ONE FAMILY ONLY}.
   }
-  \item{data2}{
+  \item{ind.data}{
     A comprehensive dataset that describes each individual in details, including age, gender (1 for male, 2 for female), mutation status (0 for wildtype, 1 for mutation, NA if unknown), vital status (A if alive, D if dead), and cancer history (cancer type and age at diagnosis). Both data1 and data2 can be generated from family and cancer datasets using \link{combinedata} and \link{convert.data}. See the example below.
   }
   \item{counselee.id}{
