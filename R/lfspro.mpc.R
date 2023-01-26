@@ -1,8 +1,8 @@
-.lfspro.mpc <- function (fam.data, cancer.data, parameter, counselee.id, allef, nloci, mRate) 
-{
+.lfspro.mpc <- function (fam.data, cancer.data, counselee.id, 
+                         parameter, allef, nloci, mRate, mut.info = TRUE) {
   num.cancer <- nrow(cancer.data)
-  cancer.type.num <- rep(-1, num.cancer)
   colnames(counselee.id) <- c("fam.id", "id")
+  
   for (i in 1:num.cancer) {
     tmp <- lfspro.cancer.type[cancer.data$cancer.type[i]]
     if (is.na(tmp)) {
@@ -17,20 +17,17 @@
       colnames(rlt) <- c("fam.id", "id", "pp")
       return(rlt)
     }
-    cancer.type.num[i] <- tmp
   }
-  cancer.data$cancer.type <- cancer.type.num
-  fam.cancer.data <- combinedata(fam.data, cancer.data)
   
-  ####
+  fam.cancer.data <- combinedata(fam.data, cancer.data)
   data.obj <- convert.data(fam.cancer.data)
   data.obj1 <- data.obj[[1]]
   data.obj2 <- data.obj[[2]]
-  ####
 
   num.fam <- length(fam.cancer.data)
   pp.all <- NULL
   risk_mpc <- NULL
+  
   for (i in 1:num.fam) {
     cid <- counselee.id$id[counselee.id$fam.id == fam.cancer.data[[i]]$fam.id[1]]
     if (length(cid) < 1) {
@@ -38,11 +35,13 @@
                   fam.cancer.data[[i]]$fam.id[1], sep = ""))
       next
     }
-    pp.tmp <- lfsproC.mpc(fam.cancer.data[[i]], parameter, data.obj1[[i]], data.obj2[[i]], cid, allef, nloci, mRate) # family cancer data
+    pp.tmp <- lfsproC.mpc(data.obj1[[i]], data.obj2[[i]], cid, 
+                          parameter, allef, nloci, mRate, mut.info) 
     risk <- risk.mpc(fam.cancer.data[[i]], cancer.data, cid, data.obj2[[i]], parameter)
     risk_mpc <- rbind(risk_mpc, risk)
     pp.all <- rbind(pp.all, pp.tmp)
   }
+  
   pp <- 1 - pp.all[, 1]
   rlt <- data.frame(cbind(counselee.id, pp), check.names = FALSE)
   risk_mpc <- data.frame(risk_mpc)
